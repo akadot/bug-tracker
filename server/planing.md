@@ -45,5 +45,6 @@
   - title (string);
   - description (string);
   - type (bug || suggestion || obs || ...);
+  - created_by (user.id)
   - created_at (timestamp);
   - edited_at (timestamp).

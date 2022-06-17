@@ -1,15 +1,12 @@
 import { Router } from 'express';
 
+//Controllers
+import * as TicketsController from '../controllers/TicketsController.js'
+
 const router = Router();
 
-router.get('/', (req, res) => {
+router.get('/', TicketsController.index);
 
-	res.status(200).send({ msg: 'Tickets GET' })
-});
-
-router.post('/', (req, res) => {
-
-	res.status(201).send({ msg: 'Tickets POST' })
-});
+router.post('/', TicketsController.store);
 
 export default router;
