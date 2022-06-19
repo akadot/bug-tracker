@@ -1,5 +1,6 @@
 import express from 'express';
 import dotenv from 'dotenv';
+import cors from 'cors'
 
 // Routes
 import ticketsRouter from './src/routes/ticketsRouter.js';
@@ -10,6 +11,7 @@ import connection from './src/database/connection.js';
 dotenv.config();
 const app = express();
 
+app.use(cors());
 app.use(express.json());
 app.set('db', connection);
 
