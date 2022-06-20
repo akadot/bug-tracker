@@ -15,10 +15,10 @@
 
 ### Users
 
-- GET /users                    -> 200 OK, Array<User>
-- POST /users                   -> 201 Created, User
-- PUT /users/:id                -> 201 Created, User
-- DELETE /users/:id             -> 200 OK, String
+- GET /users                    -> 200 OK, Array<User> - Done
+- POST /users                   -> 201 Created, User - Done
+- PUT /users/:id                -> 201 Created, User - Done
+- DELETE /users/:id             -> 200 OK, String - Done
 
 ### Projects
 
@@ -27,24 +27,23 @@
 - PUT /projects/:id             -> 201 Created, Project
 - DELETE /projects/:id          -> 200 OK, String
 
-## Schemas
+### Roles
 
-- User:
-  - name (string);
-  - email (string);
-  - password (hash);
-  - role (user || admin).
+- GET /roles                 -> 200 OK, Array<Role> - Done
+- POST /roles                -> 201 Created, Role - Done
+- PUT /roles/:id             -> 201 Created, Role - Done
+- DELETE /roles/:id          -> 200 OK, String - Done
 
-- Project:
-  - name (string);
-  - description (string);
-  - team (users[]);
-  - issues (issue[]).
+### Status
 
-- Issue:
-  - title (string);
-  - description (string);
-  - type (bug || suggestion || obs || ...);
-  - created_by (user.id)
-  - created_at (timestamp);
-  - edited_at (timestamp).
+- GET /status                 -> 200 OK, Array<Status>
+- POST /status                -> 201 Created, Status
+- PUT /status/:id             -> 201 Created, Status
+- DELETE /status/:id          -> 200 OK, String
+
+### Categories
+
+- GET /categories                 -> 200 OK, Array<Category>
+- POST /categories                -> 201 Created, Category
+- PUT /categories/:id             -> 201 Created, Category
+- DELETE /categories/:id          -> 200 OK, String
