@@ -6,6 +6,20 @@ export async function index(req, res) {
 	res.end();
 }
 
+export async function show(req, res) {
+	const { id } = req.params;
+
+	if (!id) {
+		res.status(400).send({ error: 'ERRO: ID não recebido.' });
+		res.end();
+		return;
+	}
+
+	const user = await UserModel.getUserById(id);
+	res.status(200).send({ data: user });
+	res.end();
+}
+
 export async function store(req, res) {
 	const { name, email, password, role } = req.body;
 
@@ -45,6 +59,6 @@ export async function remove(req, res) {
 	}
 
 	await UserModel.deleteUser(id);
-	res.status(200).send({ data: `Usuário de id ${id} deletado.` });
+	res.status(200).send({ data: `Usuário de ID ${id} deletado.` });
 	res.end();
 }

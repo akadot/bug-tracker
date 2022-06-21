@@ -9,4 +9,8 @@ router.get('/', TicketsController.index);
 
 router.post('/', TicketsController.store);
 
+router.put('/:id', TicketsController.update);
+
+router.delete('/:id', TicketsController.remove);
+
 export default router;

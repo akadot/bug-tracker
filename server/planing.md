@@ -16,6 +16,7 @@
 ### Users
 
 - GET /users                    -> 200 OK, Array<User>
+- GET /users/:id                -> 200 OK, User
 - POST /users                   -> 201 Created, User
 - PUT /users/:id                -> 201 Created, User
 - DELETE /users/:id             -> 200 OK, String

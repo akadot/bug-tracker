@@ -3,13 +3,22 @@ import jwt from 'jsonwebtoken';
 import dotenv from 'dotenv';
 
 import * as db from '../database/connection.js';
-import * as RolesModel from './RolesModel.js'
 
 dotenv.config();
 
 export async function getAllUsers() {
 	const users = await db.default.select('*').from('users');
 	return users;
+}
+
+export async function getUserById(id) {
+	const user = await db.default('users').where({ id: id });
+
+	if (user.length <= 0) {
+		return `Usuário de ID ${id} não existe no sistema.`
+	}
+
+	return user;
 }
 
 export async function addUser(name, email, password, role) {
