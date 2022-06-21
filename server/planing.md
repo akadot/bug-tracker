@@ -15,10 +15,10 @@
 
 ### Users
 
-- GET /users                    -> 200 OK, Array<User> - Done
-- POST /users                   -> 201 Created, User - Done
-- PUT /users/:id                -> 201 Created, User - Done
-- DELETE /users/:id             -> 200 OK, String - Done
+- GET /users                    -> 200 OK, Array<User>
+- POST /users                   -> 201 Created, User
+- PUT /users/:id                -> 201 Created, User
+- DELETE /users/:id             -> 200 OK, String
 
 ### Projects
 
@@ -29,21 +29,21 @@
 
 ### Roles
 
-- GET /roles                 -> 200 OK, Array<Role> - Done
-- POST /roles                -> 201 Created, Role - Done
-- PUT /roles/:id             -> 201 Created, Role - Done
-- DELETE /roles/:id          -> 200 OK, String - Done
+- GET /roles                 -> 200 OK, Array<Role>
+- POST /roles                -> 201 Created, Role
+- PUT /roles/:title             -> 201 Created, Role
+- DELETE /roles/:title          -> 200 OK, String
 
 ### Status
 
 - GET /status                 -> 200 OK, Array<Status>
 - POST /status                -> 201 Created, Status
-- PUT /status/:id             -> 201 Created, Status
-- DELETE /status/:id          -> 200 OK, String
+- PUT /status/:title             -> 201 Created, Status
+- DELETE /status/:title          -> 200 OK, String
 
 ### Categories
 
 - GET /categories                 -> 200 OK, Array<Category>
 - POST /categories                -> 201 Created, Category
-- PUT /categories/:id             -> 201 Created, Category
-- DELETE /categories/:id          -> 200 OK, String
+- PUT /categories/:title             -> 201 Created, Category
+- DELETE /categories/:title          -> 200 OK, String
