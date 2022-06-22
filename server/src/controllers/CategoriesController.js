@@ -17,6 +17,12 @@ export async function store(req, res) {
 	}
 
 	const newCategory = await CategoriesModel.addCategory(title, description);
+
+	if (newCategory == null) {
+		res.status(409).send({ error: `Categoria ${title} já existe no sistema.` }).end();
+		return;
+	}
+
 	res.status(201).send({ data: newCategory });
 	res.end();
 }
@@ -32,6 +38,12 @@ export async function update(req, res) {
 	}
 
 	const editedCategory = await CategoriesModel.editCategory(title, fields);
+
+	if (editedCategory == null) {
+		res.status(404).send({ error: `Categoria não encontrada.` }).end();
+		return;
+	}
+
 	res.status(201).send({ data: editedCategory });
 	res.end();
 }
@@ -45,7 +57,13 @@ export async function remove(req, res) {
 		return;
 	}
 
-	await CategoriesModel.deleteCategory(title);
+	const removedCategory = await CategoriesModel.deleteCategory(title);
+
+	if (editedCategory == null) {
+		res.status(404).send({ error: `Categoria não encontrada.` }).end();
+		return;
+	}
+
 	res.status(200).send({ data: `Categoria ${title} deletada.` });
 	res.end();
 

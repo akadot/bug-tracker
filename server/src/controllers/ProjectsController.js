@@ -17,6 +17,7 @@ export async function store(req, res) {
 	}
 
 	const newProject = await ProjectsModel.addProject(name, description);
+
 	res.status(201).send({ data: newProject });
 	res.end();
 }
@@ -32,6 +33,12 @@ export async function update(req, res) {
 	}
 
 	const editedProject = await ProjectsModel.editProject(id, fields);
+
+	if (editedProject == null) {
+		res.status(404).send({ error: `Projeto não encontrado.` }).end();
+		return;
+	}
+
 	res.status(201).send({ data: editedProject });
 	res.end();
 }
@@ -45,7 +52,13 @@ export async function remove(req, res) {
 		return;
 	}
 
-	await ProjectsModel.deleteProject(id);
+	const removedProject = await ProjectsModel.deleteProject(id);
+
+	if (removedProject == null) {
+		res.status(404).send({ error: `Projeto não encontrado.` }).end();
+		return;
+	}
+
 	res.status(200).send({ data: `Projeto de ID ${id} deletado.` });
 	res.end();
 

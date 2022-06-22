@@ -30,6 +30,16 @@ export async function store(req, res) {
 	}
 
 	const newUser = await UserModel.addUser(name, email, password, role);
+
+	if (newUser == 'errorUser') {
+		res.status(404).send({ error: `Usuário não encontrado.` }).end();
+		return;
+	} else if (newUser == 'errorRole') {
+		res.status(404).send({ error: `A role ${role} não existe no sistema.` }).end();
+		return;
+	}
+
+
 	res.status(201).send({ data: newUser });
 	res.end();
 }
@@ -45,6 +55,15 @@ export async function update(req, res) {
 	}
 
 	const editedUser = await UserModel.editUser(id, fields);
+
+	if (editedUser == 'errorUser') {
+		res.status(404).send({ error: `Usuário não encontrado.` }).end();
+		return;
+	} else if (editedUser == 'errorRole') {
+		res.status(404).send({ error: `A role ${role} não existe no sistema.` }).end();
+		return;
+	}
+
 	res.status(201).send({ data: editedUser });
 	res.end();
 }
@@ -58,7 +77,13 @@ export async function remove(req, res) {
 		return;
 	}
 
-	await UserModel.deleteUser(id);
+	const removedUser = await UserModel.deleteUser(id);
+
+	if (removedUser == null) {
+		res.status(404).send({ error: `Usuário não encontrado.` }).end();
+		return;
+	}
+
 	res.status(200).send({ data: `Usuário de ID ${id} deletado.` });
 	res.end();
 }

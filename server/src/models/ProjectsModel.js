@@ -21,7 +21,7 @@ export async function editProject(id, fields) {
 	const matchProject = await db.default('projects').where({ id: id });
 
 	if (matchProject.length <= 0) {
-		return `Projeto não encontrado.`;
+		return null;
 	}
 
 	const project = matchProject[0];
@@ -40,7 +40,7 @@ export async function deleteProject(id) {
 	const matchProject = await db.default('projects').where({ id: id });
 
 	if (matchProject.length <= 0) {
-		return `Projeto não encontrado.`;
+		return null;
 	}
 
 	await db.default('projects').where({ id: id }).del();

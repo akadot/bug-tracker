@@ -11,19 +11,18 @@ export async function addTicket(title, description, category, created_by, projec
 	const matchCategory = await db.default('categories').where({ title: category });
 
 	if (matchUser.length <= 0) {
-		return `Usuário ${created_by} não encontrado.`;
+		return 'errorUser';
 	}
 
 	if (matchProject.length <= 0) {
-		return `Projeto ${project_id} não encontrado.`;
+		return 'errorProject';
 	}
 
 	if (matchCategory.length <= 0) {
-		return `Categoria ${category} não encontrado.`;
+		return 'errorCat';
 	}
 
-	const date = new Date();
-	const now = date.toISOString();
+	const now = new Date().toLocaleString();
 
 	const newTicket = {
 		title: title,
@@ -45,12 +44,12 @@ export async function editTicket(id, fields) {
 	const matchTicket = await db.default('tickets').where({ id: id });
 
 	if (matchTicket.length <= 0) {
-		return `Ticket de ID ${id} não encontrado no sistema.`;
+		return null;
 	}
 
 	const ticket = matchTicket[0];
 
-	const now = new Date().toISOString()
+	const now = new Date().toLocaleString()
 
 	const editedTicket = {
 		title: fields.title ? fields.title : ticket.title,
@@ -72,7 +71,7 @@ export async function deleteTicket(id) {
 	const matchTicket = await db.default('tickets').where({ id: id });
 
 	if (matchTicket.length <= 0) {
-		return `Ticket não encontrado.`;
+		return null;
 	}
 
 	await db.default('tickets').where({ id: id }).del();

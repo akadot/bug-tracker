@@ -9,7 +9,7 @@ export async function addCategory(title, description) {
 	const matchCategory = await db.default('categories').where({ title: title });
 
 	if (matchCategory.length > 0) {
-		return `Categoria ${title} já existe no sistema.`;
+		return null;
 	}
 
 
@@ -27,7 +27,7 @@ export async function editCategory(title, fields) {
 	const matchCategory = await db.default('categories').where({ title: title });
 
 	if (matchCategory.length <= 0) {
-		return `Categoria não encontrada.`;
+		return null;
 	}
 
 	const category = matchCategory[0];
@@ -46,7 +46,7 @@ export async function deleteCategory(title) {
 	const matchCategory = await db.default('categories').where({ title: title });
 
 	if (matchCategory.length <= 0) {
-		return `Categoria não encontrada.`;
+		return null;
 	}
 
 	await db.default('categories').where({ title: title }).del();

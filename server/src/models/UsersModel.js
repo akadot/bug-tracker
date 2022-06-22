@@ -1,5 +1,4 @@
 import bcrypt from 'bcrypt';
-import jwt from 'jsonwebtoken';
 import dotenv from 'dotenv';
 
 import * as db from '../database/connection.js';
@@ -26,11 +25,11 @@ export async function addUser(name, email, password, role) {
 	const matchRole = await db.default('roles').where({ title: role });
 
 	if (matchUser.length > 0) {
-		return `Usuário de email ${email} já existe no sistema.`;
+		return 'errorUser';
 	}
 
 	if (matchRole.length == 0 || matchRole == undefined) {
-		return `A role ${role} não existe no sistema.`
+		return 'errorRole';
 	}
 
 	const hashPass = await bcrypt.hash(password, 10);
@@ -53,7 +52,7 @@ export async function editUser(id, fields) {
 	let newRole;
 
 	if (matchUser.length <= 0) {
-		return `Usuário não encontrado.`;
+		return 'errorUser';
 	}
 
 	if (fields.password != null) {
@@ -63,7 +62,7 @@ export async function editUser(id, fields) {
 	if (fields.role != null) {
 		let matchRole = await db.default('roles').where({ title: fields.role });
 		if (matchRole.length == 0 || matchRole == undefined) {
-			return `A role ${fields.role} não existe no sistema.`
+			return 'errorRole';
 		}
 
 		newRole = matchRole[0].title
@@ -87,7 +86,7 @@ export async function deleteUser(id) {
 	const matchUser = await db.default('users').where({ id: id });
 
 	if (matchUser.length <= 0) {
-		return `Usuário não encontrado.`;
+		return null;
 	}
 
 	await db.default('users').where({ id: id }).del();

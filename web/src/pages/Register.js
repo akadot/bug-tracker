@@ -1,16 +1,17 @@
 import React from "react";
-import LoginForm from "../components/LoginForm";
+
+import RegisterForm from "../components/RegisterForm";
 import Container from "../components/Container";
 
-import Logo from '../assets/logo.svg'
+import Logo from '../assets/logo.svg';
 
-const Login = () => {
+const Register = () => {
 	return (
 		<Container>
 			<img src={Logo} alt='Bug Tracker Logo' />
-			<LoginForm />
+			<RegisterForm />
 		</Container>
 	);
 }
 
-export default Login;
+export default Register;

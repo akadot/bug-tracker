@@ -9,7 +9,7 @@ export async function addStatus(title, description) {
 	const matchStatus = await db.default('status').where({ title: title });
 
 	if (matchStatus.length > 0) {
-		return `Status ${title} já existe no sistema.`;
+		return null;
 	}
 
 
@@ -27,7 +27,7 @@ export async function editStatus(title, fields) {
 	const matchStatus = await db.default('status').where({ title: title });
 
 	if (matchStatus.length <= 0) {
-		return `Status não encontrado.`;
+		return null;
 	}
 
 	const status = matchRole[0];
@@ -46,7 +46,7 @@ export async function deleteStatus(title) {
 	const matchStatus = await db.default('status').where({ title: title });
 
 	if (matchStatus.length <= 0) {
-		return `Status não encontrado.`;
+		return null;
 	}
 
 	await db.default('status').where({ title: title }).del();

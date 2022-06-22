@@ -9,7 +9,7 @@ export async function addRole(title, description) {
 	const matchRole = await db.default('roles').where({ title: title });
 
 	if (matchRole.length > 0) {
-		return `Role ${title} já existe no sistema.`;
+		return null;
 	}
 
 
@@ -27,7 +27,7 @@ export async function editRole(title, fields) {
 	const matchRole = await db.default('roles').where({ title: title });
 
 	if (matchRole.length <= 0) {
-		return `Role não encontrado.`;
+		return null;
 	}
 
 	const role = matchRole[0];
@@ -46,7 +46,7 @@ export async function deleteRole(title) {
 	const matchRole = await db.default('roles').where({ title: title });
 
 	if (matchRole.length <= 0) {
-		return `Role não encontrado.`;
+		return null;
 	}
 
 	await db.default('roles').where({ title: title }).del();

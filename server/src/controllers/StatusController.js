@@ -17,6 +17,12 @@ export async function store(req, res) {
 	}
 
 	const newRole = await StatusModel.addStatus(title, description);
+
+	if (newRole == null) {
+		res.status(409).send({ error: `Status ${title} já existe no sistema.` }).end();
+		return;
+	}
+
 	res.status(201).send({ data: newRole });
 	res.end();
 }
@@ -32,6 +38,12 @@ export async function update(req, res) {
 	}
 
 	const editedRole = await StatusModel.editStatus(title, fields);
+
+	if (editedRole == null) {
+		res.status(404).send(`Status não encontrado.`).end();
+		return;
+	}
+
 	res.status(201).send({ data: editedRole });
 	res.end();
 }
@@ -45,7 +57,13 @@ export async function remove(req, res) {
 		return;
 	}
 
-	await StatusModel.deleteStatus(title);
+	const removedStatus = await StatusModel.deleteStatus(title);
+
+	if (removedStatus == null) {
+		res.status(404).send(`Status não encontrado.`).end();
+		return;
+	}
+
 	res.status(200).send({ data: `Status ${title} deletada.` });
 	res.end();
 
