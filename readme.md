@@ -16,7 +16,7 @@ A bug tracker to help my development process.
  npm install
  ```
 
-### Server
+### 🌐 Server
 
 - Create a Postgres database
 
@@ -46,7 +46,7 @@ npm run dev
 
 </br>
 
-### Web
+### 💻 Web
 
 - Start react development server
 
