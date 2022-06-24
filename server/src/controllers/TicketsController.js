@@ -3,9 +3,11 @@ import * as UsersModel from '../models/UsersModel.js';
 import * as ProjectsModel from '../models/ProjectsModel.js';
 
 export async function index(req, res) {
-	const tickets = await TicketsModel.getAllTickets();
+	let tickets = await TicketsModel.getAllTickets();
 	const users = await UsersModel.getAllUsers();
 	const projects = await ProjectsModel.getAllProjects();
+
+	const { status } = req.query;
 
 	tickets.forEach(ticket => {
 		let matchUser = users.filter(item => item.id == ticket['created_by']);
@@ -18,6 +20,9 @@ export async function index(req, res) {
 		ticket.project_id = projname
 	});
 
+	if (status != undefined || status != null) {
+		tickets = tickets.filter(item => item.status === status);
+	}
 
 	res.status(200).send({ data: tickets });
 	res.end();

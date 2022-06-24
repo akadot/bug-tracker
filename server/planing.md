@@ -11,7 +11,7 @@
 - GET /tickets                  -> 200 OK, Array<Ticket>
 - GET /tickets/:id              -> 200 OK, Ticket
 - GET /tickets?shortBy=date     -> 200 OK, Array<Ticket>
-- GET /tickets?filter=open      -> 200 OK, Array<Ticket>
+- GET /tickets?status=open      -> 200 OK, Array<Ticket>
 
 - POST /tickets                 -> 201 Created, Ticket
 - PUT /tickets/:id              -> 201 Created, Ticket

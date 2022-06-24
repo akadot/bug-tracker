@@ -6,8 +6,7 @@ height: 100%;
 padding: 0 10px;
 margin-left: 20px;
 display: flex;
-
-
+flex-direction: column;
 overflow-y: scroll;
 
 & ul{

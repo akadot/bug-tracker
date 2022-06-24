@@ -5,10 +5,14 @@ import { useEffect, useState } from 'react';
 
 import ContentContainer from "../components/Content";
 import TicketItem from "../components/Ticket";
+import Filter from '../components/Filter';
 
 
 const Tickets = () => {
 	const [allTickets, setAllTickets] = useState([]);
+	const [allStatus, setAllStatus] = useState([]);
+	const [filteredTickets, setFilteredTickets] = useState([]);
+	const [statusFilter, setStatusFilter] = useState("");
 
 	const userName = localStorage.getItem("user_name");
 	const userId = localStorage.getItem("user_id");
@@ -28,8 +32,26 @@ const Tickets = () => {
 					console.error(err)
 					window.alert(err.response.data.error)
 				})
+
+			await axios.get(`http://localhost:8080/status`, { headers: { 'authorization': token } })
+				.then((success) => {
+					const status = success.data.data;
+					setAllStatus(status)
+				}).catch(err => {
+					console.error(err)
+					window.alert(err.response.data.error)
+				})
 		})()
 	}, [token, userId, role, userName]);
+
+	useEffect(() => {
+		if (statusFilter === 'todos') {
+			setFilteredTickets(allTickets);
+		} else {
+			let filtered = allTickets.filter(item => item.status === statusFilter);
+			setFilteredTickets(filtered)
+		}
+	}, [statusFilter, allTickets])
 
 	async function deleteTicket(id) {
 		await axios.delete(`http://localhost:8080/tickets/${id}`, { headers: { 'authorization': token } })
@@ -44,9 +66,10 @@ const Tickets = () => {
 
 	return (
 		<ContentContainer>
+			<Filter array={allStatus} setArray={setStatusFilter} />
 			<ul>
 				{
-					allTickets.map(item => {
+					filteredTickets.map(item => {
 						return (
 							<TicketItem key={item.id} title={item.title} description={item.description} user={item.created_by} project={item.project_id} category={item.category} status={item.status} datetime={item.created_at} onDelete={() => deleteTicket(item.id)} />
 						)

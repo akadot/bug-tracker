@@ -12,7 +12,7 @@ const Roles = () => {
 	const token = localStorage.getItem("api_token");
 
 	useEffect(() => {
-		(async function getTickets() {
+		(async function getRoles() {
 			await axios.get(`http://localhost:8080/roles`, { headers: { 'authorization': token } })
 				.then((success) => {
 					const roles = success.data.data;
@@ -24,7 +24,7 @@ const Roles = () => {
 		})()
 	}, [token, userId, role]);
 
-	async function deleteTicket(title) {
+	async function deleteRoles(title) {
 		await axios.delete(`http://localhost:8080/roles/${title}`, { headers: { 'authorization': token } })
 			.then(() => {
 				const newList = roles.filter(item => item.title !== title);
@@ -41,7 +41,7 @@ const Roles = () => {
 				{
 					roles.map(item => {
 						return (
-							<GenericItem key={item.title} title={item.title} description={item.description} onDelete={() => deleteTicket(item.title)} />
+							<GenericItem key={item.title} title={item.title} description={item.description} onDelete={() => deleteRoles(item.title)} />
 
 						)
 					})
