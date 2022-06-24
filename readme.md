@@ -4,11 +4,11 @@ A bug tracker to help my development process.
 
 ## Get Started
 
-1. Clone or download this repository
+- Clone or download this repository
 
-2. Access folders ./server and ./web
+- Access folders ./server and ./web
 
-3. Install dependencies on both folders
+- Install dependencies on both folders
 
  ```console
  yarn install
@@ -18,11 +18,11 @@ A bug tracker to help my development process.
 
 ### Server
 
-1. Create a Postgres database
+- Create a Postgres database
 
-2. Create tables following [this file](https://github.com/akadot/bug-tracker/blob/master/server/src/database/schema.sql)
+- Create tables following [this file](https://github.com/akadot/bug-tracker/blob/master/server/src/database/schema.sql)
 
-3. Create a .env file with this infos
+- Create a .env file with this infos
 
 ```.env
 PORT = (server port)
@@ -34,7 +34,7 @@ DB_DATABASE = (postgres database name)
 TOKEN_SECRET = (generate random characters to your token secret)
 ```
 
-4. Start server
+- Start server
 
 ```console
 yarn dev
@@ -42,8 +42,20 @@ or
 npm run dev
 ```
 
-5. Access routes following [this structure](https://github.com/akadot/bug-tracker/blob/master/server/planing.md)
+- Access routes following [this structure](https://github.com/akadot/bug-tracker/blob/master/server/planing.md)
+
+</br>
 
 ### Web
 
-Coming soon...
+- Start react development server
+
+```console
+yarn start
+or
+npm run start
+```
+
+- Access *localhost:3000* to be redirected to Login page
+
+- Every user created in *Register* page, will recieve an "normal user" role. To change this, make an admin in the database before.
