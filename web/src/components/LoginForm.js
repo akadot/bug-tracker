@@ -29,7 +29,10 @@ const Form = () => {
 			password: password
 		}).then((success) => {
 			localStorage.setItem("api_token", success.data.token);
-			navigate('/dashboard');
+			localStorage.setItem("user_id", success.data.userId);
+			localStorage.setItem("user_role", success.data.role);
+			localStorage.setItem("user_name", success.data.name);
+			navigate(`/dashboard`);
 		}).catch((err) => {
 			const msg = err.response.data.error;
 			window.alert(msg);

@@ -2,7 +2,11 @@
 
 ## Routes
 
-### Bug Tickets
+### Auth
+
+- POST /auth/login             -> 200 OK, JWT
+
+### Tickets
 
 - GET /tickets                  -> 200 OK, Array<Ticket>
 - GET /tickets/:id              -> 200 OK, Ticket

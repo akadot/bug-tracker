@@ -50,4 +50,5 @@ export async function deleteRole(title) {
 	}
 
 	await db.default('roles').where({ title: title }).del();
+	return 'success';
 }

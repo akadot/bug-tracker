@@ -50,4 +50,5 @@ export async function deleteCategory(title) {
 	}
 
 	await db.default('categories').where({ title: title }).del();
+	return 'success';
 }

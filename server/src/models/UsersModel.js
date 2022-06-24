@@ -90,4 +90,6 @@ export async function deleteUser(id) {
 	}
 
 	await db.default('users').where({ id: id }).del();
+
+	return 'success';
 }

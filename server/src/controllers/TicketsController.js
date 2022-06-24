@@ -1,7 +1,24 @@
 import * as TicketsModel from '../models/TicketsModel.js';
+import * as UsersModel from '../models/UsersModel.js';
+import * as ProjectsModel from '../models/ProjectsModel.js';
 
 export async function index(req, res) {
 	const tickets = await TicketsModel.getAllTickets();
+	const users = await UsersModel.getAllUsers();
+	const projects = await ProjectsModel.getAllProjects();
+
+	tickets.forEach(ticket => {
+		let matchUser = users.filter(item => item.id == ticket['created_by']);
+		let matchProj = projects.filter(item => item.id == ticket['project_id']);
+		let username = matchUser[0]['name']
+		let projname = matchProj[0]['name']
+
+
+		ticket.created_by = username
+		ticket.project_id = projname
+	});
+
+
 	res.status(200).send({ data: tickets });
 	res.end();
 	return;

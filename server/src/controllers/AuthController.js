@@ -35,7 +35,7 @@ export async function signIn(req, res) {
 	//criar token ({auth: true, userId: user.id, role: user.role})
 	const token = jwt.sign({ userId: user.id, role: user.role }, process.env.TOKEN_SECRET, { expiresIn: 1800 });
 
-	res.status(200).send({ auth: true, token });
+	res.status(200).send({ auth: true, token, userId: user.id, role: user.role, name: user.name });
 	res.end();
 }
 

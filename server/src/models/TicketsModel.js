@@ -75,4 +75,5 @@ export async function deleteTicket(id) {
 	}
 
 	await db.default('tickets').where({ id: id }).del();
+	return 'success';
 }

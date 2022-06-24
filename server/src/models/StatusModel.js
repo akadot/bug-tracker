@@ -50,4 +50,5 @@ export async function deleteStatus(title) {
 	}
 
 	await db.default('status').where({ title: title }).del();
+	return 'success';
 }

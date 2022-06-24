@@ -44,4 +44,5 @@ export async function deleteProject(id) {
 	}
 
 	await db.default('projects').where({ id: id }).del();
+	return 'success';
 }
